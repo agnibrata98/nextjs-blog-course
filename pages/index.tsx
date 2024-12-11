@@ -8,6 +8,10 @@ import { FieldValues, useForm } from "react-hook-form";
 import { contactProps } from "@/typeScript/cms.interface";
 import toast from "react-hot-toast";
 import ErrorPage from "@/ui/errors/Error";
+import image1 from "@/public/images/managed-it-services.jpg";
+import image2 from "@/public/images/Internet-services.jpg";
+import image3 from "@/public/images/carousel3.jpg";
+import AliceCarousel from "react-alice-carousel";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -51,6 +55,14 @@ var services = [
   },
   
 ]
+
+const handleDragStart = (e : any) => e.preventDefault();
+
+const items = [
+  <img src="https://hexaware.com/wp-content/uploads/2019/10/Hi-Tech-Platforms-Information-Services.jpg" alt="Image 1" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,,
+  <img src="https://www.prontomarketing.com/wp-content/uploads/2021/08/Managed-Services-Provider-e1596510425847-1.jpg" alt="Image 2" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
+  <img src="https://pakobserver.net/wp-content/uploads/2023/08/IT-scaled.webp" alt="Image 3" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
+];
 
 export default function Home() {
   const {
@@ -120,11 +132,23 @@ export default function Home() {
         }}
       >
         <ErrorPage errorMessage={(contactError as Error).message || 'An error occurred'} />
-    </Box>
+      </Box>
   );
 }
   return (
     <>
+
+    {/* slider section */}
+    <AliceCarousel
+       items={items}
+      //  responsive={responsive}
+       autoPlay
+       autoPlayInterval={1000}
+       infinite
+       animationDuration={500}
+       disableDotsControls
+       disableButtonsControls
+    />
       {/* services section */}
       <Container maxWidth="lg" sx={{ mt: 8 }}>
         <Typography variant="h4" textAlign="center" mb={4}>

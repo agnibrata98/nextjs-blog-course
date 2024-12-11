@@ -1,28 +1,23 @@
-import Head from "next/head";
-import Image from "next/image";
+
 import localFont from "next/font/local";
-import styles from "@/styles/Home.module.css";
 import { allBannersQuery, createContactMutation } from "@/customHooks/cms.query.hooks";
 import { Box, Button, Card, CardContent, CircularProgress, Container, Grid, Paper, TextField, Typography } from "@mui/material";
 import { FieldValues, useForm } from "react-hook-form";
 import { contactProps } from "@/typeScript/cms.interface";
 import toast from "react-hot-toast";
 import ErrorPage from "@/ui/errors/Error";
-import image1 from "@/public/images/managed-it-services.jpg";
-import image2 from "@/public/images/Internet-services.jpg";
-import image3 from "@/public/images/carousel3.jpg";
 import AliceCarousel from "react-alice-carousel";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+// const geistSans = localFont({
+//   src: "./fonts/GeistVF.woff",
+//   variable: "--font-geist-sans",
+//   weight: "100 900",
+// });
+// const geistMono = localFont({
+//   src: "./fonts/GeistMonoVF.woff",
+//   variable: "--font-geist-mono",
+//   weight: "100 900",
+// });
 
 var services = [
   {
@@ -56,7 +51,7 @@ var services = [
   
 ]
 
-const handleDragStart = (e : any) => e.preventDefault();
+// const handleDragStart = (e : any) => e.preventDefault();
 
 const items = [
   <img src="https://hexaware.com/wp-content/uploads/2019/10/Hi-Tech-Platforms-Information-Services.jpg" alt="Image 1" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,,

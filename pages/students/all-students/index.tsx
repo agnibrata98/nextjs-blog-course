@@ -25,8 +25,6 @@ import { set } from "react-hook-form";
 const AllStudents = () => {
   const [modal, setModal] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null); 
-  const [alertTitle, setAlertTitle] = useState("Are you sure?");
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const router = useRouter();
   const { slug } = router.query;
@@ -50,19 +48,12 @@ const AllStudents = () => {
     deleteStudentMutate(id as any, {
       onSuccess: () => {
         studentsRefetch(); // Refresh the student list
-        // setModal(false); // Close the SweetAlert modal
-        setAlertTitle("Successfully deleted"); // Update the title
-        setIsSuccess(true); // Mark success
-        setTimeout(() => {
-          setModal(false); // Close the modal after delay
-          setAlertTitle("Successfully Deleted"); // Reset the title
-          setIsSuccess(false); // Reset success state
-        }, 1000);
-      },
-      onError: (error : any) => {
-        toast.error("Error deleting student:", error.message);
         setModal(false); // Close the SweetAlert modal
-      }
+      },
+      // onError: (error : any) => {
+      //   toast.error("Error deleting student:", error.message);
+      //   setModal(false); // Close the SweetAlert modal
+      // }
     });
   };
 
@@ -164,13 +155,8 @@ if (isAllStudentsDataError) {
         <SweetAlertComponent
           confirm={()=>confirmDelete(deleteId)}
           cancel={() => setModal(false)}
-          title={alertTitle}
-          subtitle={
-            isSuccess
-              ? "The student has been successfully deleted."
-              : "You will not be able to recover!"
-          }
-          type={isSuccess ? "success" : "warning"}
+          title={"Are you sure?"}
+          subtitle={"You will not be able to recover!"}
         />
       )}
     </Box>

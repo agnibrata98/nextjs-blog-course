@@ -54,9 +54,9 @@ var services = [
 // const handleDragStart = (e : any) => e.preventDefault();
 
 const items = [
-  <img src="https://hexaware.com/wp-content/uploads/2019/10/Hi-Tech-Platforms-Information-Services.jpg" alt="Image 1" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,,
-  <img src="https://www.prontomarketing.com/wp-content/uploads/2021/08/Managed-Services-Provider-e1596510425847-1.jpg" alt="Image 2" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
-  <img src="https://pakobserver.net/wp-content/uploads/2023/08/IT-scaled.webp" alt="Image 3" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
+  <img src="/images/carousel1.jpg" alt="Image 1" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,,
+  <img src="/images/carousel2.jpg" alt="Image 2" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
+  <img src="/images/carousel3.jpg" alt="Image 3" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
 ];
 
 export default function Home() {

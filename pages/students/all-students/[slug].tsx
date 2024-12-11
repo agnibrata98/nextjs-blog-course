@@ -45,7 +45,7 @@ const StudentDetails = () => {
         updateStudentMutate(payload as updateStudentProps, {
             onSuccess: (data) => {
                 router.push("/students/all-students");
-                toast.success(data.message);
+                toast.success(data.message ||  "Student Updated Successfully");
             },
             onError: (error) => {
                 console.log(error);

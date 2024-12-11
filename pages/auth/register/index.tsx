@@ -174,7 +174,7 @@ const Register : React.FC = () => {
                 id="upload-button"
                 type="file"
                 style={{ display: "none" }}
-                onChange={(e) => setImg(e.target.files[0])}
+                onChange={(e) => { e.target.files&&setImg(e.target.files[0])}}
               />
               <label htmlFor="upload-button">
                 <Button

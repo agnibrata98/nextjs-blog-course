@@ -45,7 +45,7 @@ const AllStudents = () => {
   // };
 
   const confirmDelete = (id: string) => {
-    deleteStudentMutate(id as string, {
+    deleteStudentMutate(id as any, {
       onSuccess: () => {
         studentsRefetch(); // Refresh the student list
         setModal(false); // Close the SweetAlert modal

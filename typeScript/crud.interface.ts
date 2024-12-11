@@ -60,7 +60,7 @@ export interface IupdateStudentProps {
       address: string;
       city: string;
       class: string;
-      message: string;
+      message?: string;
 }
 export interface updateStudentProps extends IupdateStudentProps {
     data: IupdateStudentProps;

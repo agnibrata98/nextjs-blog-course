@@ -45,9 +45,11 @@ const Header: React.FC = () => {
       <Toolbar>
         {/* Left Section: Logo */}
         <Box display="flex" alignItems="center">
+          <Link href="/" style={{ textDecoration: "none" }}>
           <IconButton size="large" edge="start" color="inherit">
             <FaEarlybirds />
           </IconButton>
+          </Link>
         </Box>
 
         {/* Middle Section: Spacer */}

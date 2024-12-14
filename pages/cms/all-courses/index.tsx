@@ -11,6 +11,7 @@ const columns = [
 ];
 
 const AllCourses = () => {
+  // all courses query
   const { data: allCoursesData, isPending: allCoursesPending } = allCoursesQuery();
   const allCourses = allCoursesData?.Courses || [];
 

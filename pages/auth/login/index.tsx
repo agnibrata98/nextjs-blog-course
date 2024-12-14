@@ -40,14 +40,22 @@ const StyledButton = styled(Button)({
 });
 
 const Login: React.FC = () => {
+  // state management
+  const [showPassword, setShowPassword] = useState(false);
+  // for global state of zustand
   const { token, setToken } = useUserStore()
 
-  const [showPassword, setShowPassword] = useState(false);
+  // router navigation
   const router = useRouter();
 
+  // react hook forms
   const { register, handleSubmit, formState: { errors } } = useForm();
+
+  // login mutation
   const { mutate, isPending } = loginMutation();
 
+
+  // on submit function for login
   const onSubmit = async (formData: FieldValues) => {
     const { email, password } = formData as { email: string; password: string };
     const formdata = new FormData();

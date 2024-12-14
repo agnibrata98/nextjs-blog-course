@@ -5,11 +5,17 @@ import { useRouter } from 'next/router';
 import React from 'react';
 
 const BlogsByCategory = () => {
+  // router navigation
   const router = useRouter();
+
+  // for query params
   const { slug } = router.query;
+
+  // query hooks for blogs by category
   const { data: blogsByCategoryData, isPending: blogsByCategoryDataPending } = categoryBlogsQuery(slug as string);
 
   const blogsByCategory = blogsByCategoryData?.data || [];
+  
   if (blogsByCategoryDataPending) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>

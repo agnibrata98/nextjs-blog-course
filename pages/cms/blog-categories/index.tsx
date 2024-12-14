@@ -4,9 +4,10 @@ import Link from 'next/link';
 import React from 'react'
 
 const BlogCategories = () => {
+    // all categories query
     const { data: blogCategoriesData, isPending: blogCategoriesDataPending } = allCategoriesQuery()
 
-    console.log(blogCategoriesData, "blogCategoriesData");
+    // console.log(blogCategoriesData, "blogCategoriesData");
 
     const blogCategories = blogCategoriesData?.data || [];
 
@@ -19,24 +20,6 @@ const BlogCategories = () => {
     }
   return (
     <>
-        {/* <div>BlogCategories</div>
-        <Container>
-            <Grid container spacing={2} justifyContent="center">
-            {Array.isArray(blogCategories) && blogCategories.length > 0 ? (
-                blogCategories.map((category, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
-                        <Link href={`/cms/blog-categories/${category._id}`} key={index}>
-                            <Paper elevation={3} style={{ padding: '20px' }}>
-                                <Typography variant="h5">{category.category}</Typography>
-                            </Paper>
-                        </Link>
-                    </Grid>
-                ))
-            ) : (
-                <Typography variant="body1">No categories found</Typography>
-            )}
-            </Grid>
-        </Container> */}
         <div>
             <Typography
                 variant="h4"

@@ -8,8 +8,12 @@ import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 const StudentDetails = () => {
+  // for router navigation
     const router = useRouter();
+    // for query params
     const { slug } = router.query;
+
+    // for form validation
     const {
       register,
       handleSubmit,
@@ -17,9 +21,12 @@ const StudentDetails = () => {
       formState: { errors },
   } = useForm<studentDetailsProps>();
 
+  // for student details query
     const { data: studentDetailsData, isPending: isStudentDetailsPending, refetch: studentDetailsRefetch } = studentDetailsQuery(slug as string);
+    // for update student mutation
     const { mutate: updateStudentMutate, isPending: updateStudentPending, isError: isUpdateStudentError, error: updateStudentError } = updateStudentMutation(slug as string);
 
+    // for student details data fetching in form
     useEffect(() => {
       if (studentDetailsData) {
           setValue("name", studentDetailsData.name);
@@ -33,6 +40,8 @@ const StudentDetails = () => {
 
     // console.log(studentDetailsData, "object");
 
+
+    // for update student mutation function
     const onSubmit = (e: updateStudentProps) => {
         const payload: Partial<updateStudentProps> = {
             name: e.name,
@@ -52,22 +61,6 @@ const StudentDetails = () => {
             }
         })
     }
-
-  //   const onSubmit = (formData: updateStudentProps) => {
-  //     const formdata = new FormData();
-  //     formdata.append("name", formData.name);
-  //     formdata.append("email", formData.email);
-  //     formdata.append("phone", formData.phone);
-  //     formdata.append("address", formData.address);
-  //     formdata.append("city", formData.city);
-  //     formdata.append("class", formData.class);
-      
-
-  //     updateStudentMutate(formdata);
-  //     toast.success("Product Updated Successfully");
-
-  //     console.log(formData);
-  // };
 
     if (isStudentDetailsPending) {
         return <div>Loading...</div>;
@@ -206,13 +199,6 @@ const StudentDetails = () => {
               error={!!errors.class}
               helperText={errors.class ? errors.class.message : ''}
             />
-            {/* <TextField
-              label="Student ID"
-              variant="outlined"
-              fullWidth
-              required
-              size="small"
-            /> */}
             <Button
               type="submit"
               variant="contained"

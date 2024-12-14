@@ -4,9 +4,10 @@ import { Typography } from '@mui/material';
 import React from 'react'
 
 const Testimonial = () => {
+    // for testimonial fetching query
     const { data: allTestimonialsData, isPending: allTestimonialsDataPending } = allTestimonialsQuery()
     const allTestimonials = allTestimonialsData?.testimonials || [];
-    console.log(allTestimonials, "allTestimonialsData");
+    // console.log(allTestimonials, "allTestimonialsData");
   return (
     <>
         <Typography variant='h3' gutterBottom textAlign={'center'} sx={{ fontWeight: 'bold', color: '#333' }}>

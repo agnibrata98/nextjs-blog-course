@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const AllBlogs = () => {
+  // all blogs query 
   const { data, isPending } = allBlogsQuery();
 
   if (isPending) {

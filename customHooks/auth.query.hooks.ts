@@ -16,9 +16,6 @@ export const loginMutation = (): UseMutationResult<loginProps, unknown> => {
             if (status === 200 && token) {
                 cookie.set("token", token, { path: "/", secure: true })
                 localStorage.setItem("user", JSON.stringify(user))
-                // localStorage.setItem("name", res.user.name)
-                // localStorage.setItem("email", res.user.email)
-                // localStorage.setItem("photo", res.user.photo)
             }
             queryClient.invalidateQueries({ queryKey: ["USER"] })
         }

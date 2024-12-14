@@ -22,26 +22,37 @@ import {
   import React, { useState } from "react";
   import { useForm } from "react-hook-form";
   import { addCommentProps } from "@/typeScript/cms.interface";
-import { addCommentMutation, addLikesMutation, addUnlikesMutation, allCommentsQuery, blogDetailsQuery } from "@/customHooks/cms.query.hooks";
+  import { addCommentMutation, addLikesMutation, addUnlikesMutation, allCommentsQuery, blogDetailsQuery } from "@/customHooks/cms.query.hooks";
   
   const BlogDetails = () => {
+    // state management
     const [visibleComments, setVisibleComments] = useState(10); // Show 10 comments initially
 
+    // for react hook forms
+    const { register, handleSubmit, formState: { errors } } = useForm<addCommentProps>();
+
+    // functions for show more comments
   const showMoreComments = () => {
     setVisibleComments((prev) => prev + 10); // Load 10 more comments on each click
   };
+
+  // router navigation
     const router = useRouter();
+    // for query params
     const { slug } = router.query;
   
+    // query hooks for blogdetails
     const { data: blogData, isPending: isBlogPending, refetch: blogsRefetch } = blogDetailsQuery(slug as string);
+    // query hooks for all comments
     const { data: commentsData, isPending: isCommentsPending, refetch: commentsRefetch } = allCommentsQuery(slug as string);
   
+    // mutation hooks for add comment, likes, unlikes
     const { mutate: commentMutation } = addCommentMutation(slug as string);
     const { mutate: likesMutation } = addLikesMutation(slug as string);
     const { mutate: unlikesMutation } = addUnlikesMutation(slug as string);
   
-    const { register, handleSubmit, formState: { errors } } = useForm<addCommentProps>();
   
+    /// on submit function for add comment
     const onSubmit = (e: addCommentProps) => {
         if(localStorage.getItem("user")!=null   ){
             let user: Partial<addCommentProps> = JSON.parse(localStorage.getItem("user") as string);
@@ -63,6 +74,7 @@ import { addCommentMutation, addLikesMutation, addUnlikesMutation, allCommentsQu
             })
       }}
         
+      // on likes add
     const onLikesAdd = (p: void) => {
         likesMutation(p,{
             onSuccess: () => {
@@ -71,6 +83,7 @@ import { addCommentMutation, addLikesMutation, addUnlikesMutation, allCommentsQu
         }) 
     }
 
+    // on unlikes add
     const onUnlikesAdd = (p: void) => {
         unlikesMutation(p,{
             onSuccess: () => {
@@ -87,6 +100,7 @@ import { addCommentMutation, addLikesMutation, addUnlikesMutation, allCommentsQu
       );
     }
   
+    // extracting image source from blogData in base64 format
     const imageSrc = blogData?.photo
       ? `data:${blogData.photo.contentType};base64,${Buffer.from(blogData.photo.data).toString("base64")}`
       : null;
@@ -193,24 +207,24 @@ import { addCommentMutation, addLikesMutation, addUnlikesMutation, allCommentsQu
               Comments
             </Typography>
             <List>
-          {commentsData?.post?.comment?.comments &&
-          commentsData.post.comment.comments.length > 0 ? (
-            commentsData.post.comment.comments
-              .slice(0, visibleComments) // Limit displayed comments
-              .map((comment) => (
-                <ListItem key={comment._id}>
-                  <ListItemText
-                    primary={comment.comment}
-                    secondary={`By: ${comment.name} | Email: ${comment.email}`}
-                  />
-                </ListItem>
-              ))
-          ) : (
-            <Typography variant="body2" color="text.secondary">
-              No comments yet.
-            </Typography>
-          )}
-        </List>
+              {commentsData?.post?.comment?.comments &&
+              commentsData.post.comment.comments.length > 0 ? (
+                commentsData.post.comment.comments
+                  .slice(0, visibleComments) // Limit displayed comments
+                  .map((comment) => (
+                    <ListItem key={comment._id}>
+                      <ListItemText
+                        primary={comment.comment}
+                        secondary={`By: ${comment.name} | Email: ${comment.email}`}
+                      />
+                    </ListItem>
+                  ))
+              ) : (
+                <Typography variant="body2" color="text.secondary">
+                  No comments yet.
+                </Typography>
+              )}
+          </List>
         {commentsData?.post?.comment?.comments &&
           visibleComments < commentsData.post.comment.comments.length && (
             <Box mt={2} display="flex" justifyContent="center">

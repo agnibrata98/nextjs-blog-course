@@ -47,7 +47,6 @@ export const updateStudentMutation = (id: string) => {
     return useMutation({
         mutationFn: (payload: updateStudentProps) => updateStudentFn(id, payload),
         onSuccess: data => {
-        // queryClient.invalidateQueries({ queryKey: ["BLOGS"] });
         queryClient.invalidateQueries({ queryKey: ["UPDATE-STUDENT"] });
         console.log(data, "UPDATED STUDENT");
         }

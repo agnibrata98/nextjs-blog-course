@@ -1,4 +1,3 @@
-
 import localFont from "next/font/local";
 import { allBannersQuery, createContactMutation } from "@/customHooks/cms.query.hooks";
 import { Box, Button, Card, CardContent, CircularProgress, Container, Grid, Paper, TextField, Typography } from "@mui/material";
@@ -8,16 +7,6 @@ import toast from "react-hot-toast";
 import ErrorPage from "@/ui/errors/Error";
 import AliceCarousel from "react-alice-carousel";
 
-// const geistSans = localFont({
-//   src: "./fonts/GeistVF.woff",
-//   variable: "--font-geist-sans",
-//   weight: "100 900",
-// });
-// const geistMono = localFont({
-//   src: "./fonts/GeistMonoVF.woff",
-//   variable: "--font-geist-mono",
-//   weight: "100 900",
-// });
 
 var services = [
   {
@@ -51,7 +40,6 @@ var services = [
   
 ]
 
-// const handleDragStart = (e : any) => e.preventDefault();
 
 const items = [
   <img src="/images/carousel1.jpg" alt="Image 1" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,,
@@ -72,29 +60,6 @@ export default function Home() {
 
   const { mutate: contactMutate, isPending: contactPending, error: contactError, isError } = createContactMutation()
 
-  // const onSubmit = (formData: FieldValues) => {
-  //   const { name, email, phone, message} = formData as { name: string ,email: string; phone: string, message: string };
-  //   // console.log({ name, email, phone, message});
-  //   let a = { name, email, phone, message}
-
-    
-  //   // for image
-  //   // if (img) {
-  //   //   formdata.append("photo", img);
-  //   // }
-
-  //   contactMutate(a, {
-  //     onSuccess: (data) => {
-  //       console.log(data, "data");
-  //       toast.success(data.message);
-  //     },
-  //     onError: (error) => {
-  //       console.log(error, "error");
-  //     },
-  //   });
-
-  //   // console.log(formData);
-  // };
 
   const onSubmit = async (formData: FieldValues) => {
     const { name, email, phone, message} = formData as { name: string ,email: string; phone: string, message: string };

@@ -8,33 +8,21 @@ import { FieldValues, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 const CreateStudent = () => {
+  // for router navigation
       const router = useRouter();
+
+      //  react hook forms
       const {
         register,
         handleSubmit,
         formState: { errors },
       } = useForm<createStudentProps>();
 
-      
-      const { mutate: createStudentMutate, isPending: createStudentMutationPending, isError: isCreateStudentError, error: createStudentError } = createStudentMutation()
-    //   const onSubmit = (e: createStudentProps) => {
-            
-    //         // let email = user.email??"";
-    //         // let name = user.name?? "";
-    //         // let comment = e.comment;
-    
-    //         const payload: Partial<createStudentProps> = {
-    //             name: e.name,
-    //             email: e.email,
-    //             phone: e.phone,
-    //             address: e.address,
-    //             city: e.city,
-    //             class: e.city,
-    //         }
-    //         console.log(payload, "payload");
-    //         createStudentMutationData(payload as Partial<createStudentProps>)
-    //   }
 
+      // create student mutation
+      const { mutate: createStudentMutate, isPending: createStudentMutationPending, isError: isCreateStudentError, error: createStudentError } = createStudentMutation()
+
+    // on submit function for  create student
     const onSubmit = async (formData: FieldValues) => {
         const { name, email, phone, address, city, classs} = formData as { name: string ,email: string; phone: string, address: string, city: string, classs: string };
         const formdata = new FormData();
@@ -137,32 +125,32 @@ const CreateStudent = () => {
               error={!!errors.email}
               helperText={errors.email ? errors.email.message : ''}
             />
-              <TextField
-                label="Phone"
-                variant="outlined"
-                fullWidth
-                required
-                size="small"
-                {...register('phone', {
-                    required: 'Phone is required',
-                    minLength: { value: 3, message: 'Phone must be at least 3 characters' },
-                  })}
-                  error={!!errors.phone}
-                  helperText={errors.phone ? errors.phone.message : ''}
-              />
-              <TextField
-                label="Address"
-                variant="outlined"
-                fullWidth
-                required
-                size="small"
-                {...register('address', {
-                    required: 'Address is required',
-                    minLength: { value: 3, message: 'Address must be at least 3 characters' },
-                  })}
-                  error={!!errors.address}
-                  helperText={errors.address ? errors.address.message : ''}
-              />
+            <TextField
+              label="Phone"
+              variant="outlined"
+              fullWidth
+              required
+              size="small"
+              {...register('phone', {
+                  required: 'Phone is required',
+                  minLength: { value: 3, message: 'Phone must be at least 3 characters' },
+                })}
+                error={!!errors.phone}
+                helperText={errors.phone ? errors.phone.message : ''}
+            />
+            <TextField
+              label="Address"
+              variant="outlined"
+              fullWidth
+              required
+              size="small"
+              {...register('address', {
+                  required: 'Address is required',
+                  minLength: { value: 3, message: 'Address must be at least 3 characters' },
+                })}
+                error={!!errors.address}
+                helperText={errors.address ? errors.address.message : ''}
+            />
             <TextField
               label="City"
               variant="outlined"
@@ -190,13 +178,6 @@ const CreateStudent = () => {
               error={!!errors.class}
               helperText={errors.class ? errors.class.message : ''}
             />
-            {/* <TextField
-              label="Student ID"
-              variant="outlined"
-              fullWidth
-              required
-              size="small"
-            /> */}
             <Button
               type="submit"
               variant="contained"

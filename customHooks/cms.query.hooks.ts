@@ -51,7 +51,6 @@ export const addCommentMutation = (id: string) => {
     return useMutation({
         mutationFn: (payload: addCommentProps) => addCommentFn(id, payload),
         onSuccess: data => {
-        // queryClient.invalidateQueries({ queryKey: ["BLOGS"] });
         queryClient.invalidateQueries({ queryKey: ["ADD-COMMENT"] });
         console.log(data, "data of comments adding");
         }
@@ -64,7 +63,6 @@ export const addLikesMutation = (id: string) => {
     return useMutation({
         mutationFn: () => addLikesFn(id),
         onSuccess: data => {
-        // queryClient.invalidateQueries({ queryKey: ["BLOGS"] });
         queryClient.invalidateQueries({ queryKey: ["ADD-LIKES"] });
         console.log(data.likes, "data of likes adding");
         }
@@ -77,7 +75,6 @@ export const addUnlikesMutation = (id: string) => {
     return useMutation({
         mutationFn: () => addUnlikesFn(id),
         onSuccess: data => {
-        // queryClient.invalidateQueries({ queryKey: ["BLOGS"] });
         queryClient.invalidateQueries({ queryKey: ["ADD-UNLIKES"] });
         console.log(data.unlikes, "data of unlikes adding");
         }
@@ -155,13 +152,11 @@ export const allBannersQuery = (): UseQueryResult<IbannerProps, unknown> => {
 // for creating contact query
 export const createContactMutation = (): UseMutationResult<IcontactProps, unknown> => {
   const { queryClient } = useGlobalHooks()
-  // const cookie = new Cookies()
   return useMutation<IcontactProps, void, unknown>({
       mutationFn: addContactFn,
       onSuccess: (res: IcontactProps) => {
           const { success, message } = res || {}
           if (success) {
-              // cookie.set("token", token, { path: "/", secure: true })
               console.log(res, "res");
           }
           queryClient.invalidateQueries({ queryKey: ["CREATE_CONTACT"] })

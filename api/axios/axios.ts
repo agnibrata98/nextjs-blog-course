@@ -1,7 +1,6 @@
 import axios from "axios";
 import { Cookies } from "react-cookie";
 
-// const adminUrl = "http://89.116.32.22:7702/api/";
 const adminUrl = "https://swarupapp.in/api/";
 export const baseURL = adminUrl;
 const cookie = new Cookies();

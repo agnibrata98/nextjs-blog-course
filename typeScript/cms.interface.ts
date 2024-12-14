@@ -59,32 +59,6 @@ interface Photo {
   }
   
   //for fetching comments
-  // export interface Comment {
-  //   comment: string;
-  //   createdAt: string;
-  //   email: string;
-  //   name: string;
-  //   updatedAt: string;
-  //   _id: string;
-  // }
-  // export interface ICommentProps {
-  //   comment:object,
-  //   post: {
-  //       comment: {
-  //           blog_id: string,
-  //           title: string,
-  //           postText: string,
-  //           status: boolean,
-  //           likes: number,
-  //           category: string,
-  //           comments: Comment[],
-  //           createdAt: string,
-  //           updatedAt: string,
-  //           unlikes: number,
-            
-  //       }
-  //   }
-  // }
   export interface ICommentProps {
     comment:object,
     post: {

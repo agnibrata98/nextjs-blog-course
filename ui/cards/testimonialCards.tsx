@@ -17,9 +17,6 @@ const TestimonialCards = ({name, position, talk}:{name:string, position:string, 
         textAlign: 'center',
         height:"auto"
       }}
-    //   initial={{ opacity: 0, y: 50 }}
-    //   animate={{ opacity: 1, y: 0 }}
-    //   transition={{ duration: 0.6 }}
     >
       <img
         src={`https://avatar.iran.liara.run/public/boy?username=${name}`}
@@ -34,17 +31,6 @@ const TestimonialCards = ({name, position, talk}:{name:string, position:string, 
       />
       <h3 style={{ fontSize: '18px', marginBottom: '5px', fontWeight: 'bold' }}>{name}</h3>
       <p style={{ color: '#777', marginBottom: '10px' }}>{position}</p>
-
-      {/* <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '15px' }}>
-        {starRating.map((filled, index) => (
-          <FaStar
-            key={index}
-            color={filled ? '#FFD700' : '#dcdcdc'}
-            size={20}
-            style={{ margin: '0 2px' }}
-          />
-        ))}
-      </div> */}
 
       <p style={{ fontStyle: 'italic', color: '#555', fontSize: '16px' }}>"{talk.substring(0, 100)}"{talk.length > 100 && '...'}</p>
         </div>

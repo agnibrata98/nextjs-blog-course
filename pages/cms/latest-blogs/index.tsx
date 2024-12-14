@@ -5,6 +5,7 @@ import Link from 'next/link';
 import React from 'react';
 
 const LatestBlogs = () => {
+  // query hooks for latest blogs
   const { data: latestBlogsData, isPending: latestBlogsDataPending } = latestBlogsQuery();
   const latestAllBlogData = latestBlogsData?.data || [];
   // console.log(latestBlogsData,  'latestBlogsData');

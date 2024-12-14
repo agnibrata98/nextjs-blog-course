@@ -73,12 +73,14 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 const TeamMembers = () => {
+    // for team members fetching query
     const { data: allTeamMembersData, isPending: allTeamMembersPending } = allTeamMembersQuery();
     const allTeamMembers = allTeamMembersData?.TeamMember || [];
 
     // Refs for GSAP animations
     const cardRefs = useRef<HTMLDivElement[]>([]);
 
+    // Initialize GSAP animations on component mount
     useEffect(() => {
         cardRefs.current.forEach((card, index) => {
             gsap.from(card, {

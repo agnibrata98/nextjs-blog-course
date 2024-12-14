@@ -15,17 +15,22 @@ const Input = styled('input')({
 });
 
 const Register : React.FC = () => {
+  // state management
     const [img, setImg] = useState<File | null>(null);
     const [showPassword, setShowPassword] = useState(false);
 
+    // react hook forms
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<registerProps>();
 
+  // register mutation
+
   const { mutate, isPending } = registerMutation()
 
+  // on submit function for  register
   const onSubmit = (formData: registerProps) => {
     const formdata = new FormData();
     formdata.append("name", formData.name);
@@ -206,9 +211,6 @@ const Register : React.FC = () => {
                   <p>Drop content here</p>
                 </Box>
               )}
-                {/* <Button variant="contained" component="span">
-                  Upload Profile Pic
-                </Button> */}
             </label>
         </Stack>
 

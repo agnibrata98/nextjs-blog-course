@@ -23,27 +23,26 @@ import toast from "react-hot-toast";
 import { set } from "react-hook-form";
 
 const AllStudents = () => {
+  // for state management hook
   const [modal, setModal] = useState(false);
+  //  for delete id state management
   const [deleteId, setDeleteId] = useState<string | null>(null); 
 
+  // for router navigation
   const router = useRouter();
+  // for query params
   const { slug } = router.query;
+
+  // for query fetching for students
   const { data: allStudentsData, isPending: allStudentsPending, isError: isAllStudentsDataError ,error: allStudentsError, refetch: studentsRefetch } = allStudentsQuery();
+
+  // for delete student mutation
   const {mutate: deleteStudentMutate, isPending: deleteStudentPending, isError: isDeleteStudentError, error: deleteStudentError } = deleteStudentMutation(slug as string);
   // console.log(allStudentsError, "error");
 
   const allStudents = allStudentsData?.data || [];
 
-  // const handleDelete = (id: string) => {
-  //   deleteStudentMutate(id as string, {
-  //     onSuccess: () => {
-  //       // toast.success("Product Deleted Successfully");
-  //       studentsRefetch()
-  //     },
-  //   });
-  //   // console.log(id);
-  // };
-
+  // for confirm delete function
   const confirmDelete = (id: string) => {
     deleteStudentMutate(id as any, {
       onSuccess: () => {
@@ -57,6 +56,7 @@ const AllStudents = () => {
     });
   };
 
+  // for handle delete click for id setting and activating modal(sweet alert)
   const handleDeleteClick = (id: string) => {
     setDeleteId(id); // Set the ID of the student to delete
     setModal(true); // Show the SweetAlert modal

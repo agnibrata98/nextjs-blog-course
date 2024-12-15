@@ -1,12 +1,13 @@
 import { allBlogsQuery } from '@/customHooks/cms.query.hooks';
 import { allBlogsProps } from '@/typeScript/cms.interface';
-import { Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Typography } from '@mui/material';
+import ErrorPage from '@/ui/errors/Error';
+import { Box, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 
 const AllBlogs = () => {
   // all blogs query 
-  const { data, isPending } = allBlogsQuery();
+  const { data, isPending, isError, error } = allBlogsQuery();
 
   if (isPending) {
     return (
@@ -15,6 +16,21 @@ const AllBlogs = () => {
       </div>
     );
   }
+
+  if (isError) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <ErrorPage errorMessage={(error as Error).message || 'An error occurred'} />
+    </Box>
+  );
+}
 
   return (
     <>

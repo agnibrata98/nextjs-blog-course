@@ -12,6 +12,7 @@ import {
 } from '@mui/material';
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import ErrorPage from '@/ui/errors/Error';
 
 const Services = () => {
   // State to track expanded/collapsed state for each service
@@ -21,7 +22,7 @@ const Services = () => {
   const cardsRef = useRef<HTMLDivElement[]>([]);
 
   // Fetch services data
-  const { data: allServicesData, isPending: allServicesDataPending } = allServicesQuery();
+  const { data: allServicesData, isPending: allServicesDataPending, isError: isAllServicesDataError, error: allServicesDataError } = allServicesQuery();
   const services = allServicesData?.data || [];
   
   // Function to truncate text
@@ -60,6 +61,21 @@ const Services = () => {
       </Box>
     );
   }
+
+  if (isAllServicesDataError) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <ErrorPage errorMessage={(allServicesDataError as Error).message || 'An error occurred'} />
+    </Box>
+  );
+}
 
   return (
     <Box

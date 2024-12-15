@@ -1,5 +1,6 @@
 import { categoryBlogsQuery } from '@/customHooks/cms.query.hooks';
-import { Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Typography } from '@mui/material';
+import ErrorPage from '@/ui/errors/Error';
+import { Box, Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Typography } from '@mui/material';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
@@ -12,7 +13,7 @@ const BlogsByCategory = () => {
   const { slug } = router.query;
 
   // query hooks for blogs by category
-  const { data: blogsByCategoryData, isPending: blogsByCategoryDataPending } = categoryBlogsQuery(slug as string);
+  const { data: blogsByCategoryData, isPending: blogsByCategoryDataPending, isError: isBlogsByCategoryError, error: blogsByCategoryError } = categoryBlogsQuery(slug as string);
 
   const blogsByCategory = blogsByCategoryData?.data || [];
   
@@ -23,6 +24,21 @@ const BlogsByCategory = () => {
       </div>
     );
   }
+
+  if (isBlogsByCategoryError) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <ErrorPage errorMessage={(blogsByCategoryError as Error).message || 'An error occurred'} />
+    </Box>
+  );
+}
 
   return (
     <div

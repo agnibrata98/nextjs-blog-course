@@ -1,12 +1,13 @@
 import { latestBlogsQuery } from '@/customHooks/cms.query.hooks';
 import { latestBlogsProps } from '@/typeScript/cms.interface';
-import { Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Typography, Button } from '@mui/material';
+import ErrorPage from '@/ui/errors/Error';
+import { Card, CardActions, CardContent, CardMedia, CircularProgress, Container, Grid, Typography, Button, Box } from '@mui/material';
 import Link from 'next/link';
 import React from 'react';
 
 const LatestBlogs = () => {
   // query hooks for latest blogs
-  const { data: latestBlogsData, isPending: latestBlogsDataPending } = latestBlogsQuery();
+  const { data: latestBlogsData, isPending: latestBlogsDataPending, isError: isLatestBlogsDataError, error: latestBlogsDataError } = latestBlogsQuery();
   const latestAllBlogData = latestBlogsData?.data || [];
   // console.log(latestBlogsData,  'latestBlogsData');
 
@@ -17,6 +18,21 @@ const LatestBlogs = () => {
       </div>
     );
   }
+
+  if (isLatestBlogsDataError) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <ErrorPage errorMessage={(latestBlogsDataError as Error).message || 'An error occurred'} />
+    </Box>
+  );
+}
 
   return (
     <div

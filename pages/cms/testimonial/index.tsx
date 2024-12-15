@@ -1,13 +1,46 @@
 import { allTestimonialsQuery } from '@/customHooks/cms.query.hooks'
 import TestimonialCards from '@/ui/cards/testimonialCards';
-import { Typography } from '@mui/material';
+import ErrorPage from '@/ui/errors/Error';
+import { Box, CircularProgress, Typography } from '@mui/material';
 import React from 'react'
 
 const Testimonial = () => {
     // for testimonial fetching query
-    const { data: allTestimonialsData, isPending: allTestimonialsDataPending } = allTestimonialsQuery()
+    const { data: allTestimonialsData, isPending: allTestimonialsDataPending, isError: isAllTestimonialsDataError, error: allTestimonialsDataError } = allTestimonialsQuery()
+
     const allTestimonials = allTestimonialsData?.testimonials || [];
+
     // console.log(allTestimonials, "allTestimonialsData");
+
+    if (allTestimonialsDataPending) {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        );
+      }
+
+      if (isAllTestimonialsDataError) {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <ErrorPage errorMessage={(allTestimonialsDataError as Error).message || 'An error occurred'} />
+        </Box>
+      );
+    }
   return (
     <>
         <Typography variant='h3' gutterBottom textAlign={'center'} sx={{ fontWeight: 'bold', color: '#333' }}>

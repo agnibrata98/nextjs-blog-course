@@ -56,14 +56,26 @@ const StudentDetails = () => {
                 router.push("/students/all-students");
                 toast.success(data.message ||  "Student Updated Successfully");
             },
-            onError: (error) => {
-                console.log(error);
-            }
+            // onError: (error) => {
+            //     console.log(error, "error");
+            //     toast.error(data.message || "Something went wrong");
+            // }
         })
     }
 
     if (isStudentDetailsPending) {
-        return <div>Loading...</div>;
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      );
     }
 
     if (isUpdateStudentError) {
@@ -212,7 +224,7 @@ const StudentDetails = () => {
               }}
             >
               {/* Submit */}
-              {updateStudentPending ? <CircularProgress size={24} color="inherit" /> : 'Create'}
+              {updateStudentPending ? <CircularProgress size={24} color="inherit" /> : 'Update Student Data'}
             </Button>
           </Box>
         </form>

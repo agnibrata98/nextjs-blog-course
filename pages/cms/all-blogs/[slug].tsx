@@ -23,6 +23,7 @@ import {
   import { useForm } from "react-hook-form";
   import { addCommentProps } from "@/typeScript/cms.interface";
   import { addCommentMutation, addLikesMutation, addUnlikesMutation, allCommentsQuery, blogDetailsQuery } from "@/customHooks/cms.query.hooks";
+import toast from "react-hot-toast";
   
   const BlogDetails = () => {
     // state management
@@ -42,14 +43,16 @@ import {
     const { slug } = router.query;
   
     // query hooks for blogdetails
-    const { data: blogData, isPending: isBlogPending, refetch: blogsRefetch } = blogDetailsQuery(slug as string);
+    const { data: blogData, isPending: isBlogPending, refetch: blogsRefetch, isError: isBlogDetailsError, error: bolgDetailsError } = blogDetailsQuery(slug as string);
     // query hooks for all comments
-    const { data: commentsData, isPending: isCommentsPending, refetch: commentsRefetch } = allCommentsQuery(slug as string);
+    const { data: commentsData, isPending: isCommentsPending, refetch: commentsRefetch, isError: isCommentsFetchingError, error: commentsFetchingError } = allCommentsQuery(slug as string);
   
     // mutation hooks for add comment, likes, unlikes
-    const { mutate: commentMutation } = addCommentMutation(slug as string);
-    const { mutate: likesMutation } = addLikesMutation(slug as string);
-    const { mutate: unlikesMutation } = addUnlikesMutation(slug as string);
+    const { mutate: commentMutation,isPending: isCommentMutationPending, isError: isCommentMutationError, error: commentMutationError } = addCommentMutation(slug as string);
+    const { mutate: likesMutation, isPending: addLikesPending, isError: isAddLikesError, error: addLikesError  } = addLikesMutation(slug as string);
+    const { mutate: unlikesMutation, isPending: addUnLikesPending, isError: isAddUnLikesError, error: addUnLikesError } = addUnlikesMutation(slug as string);
+
+
   
   
     /// on submit function for add comment
@@ -65,12 +68,17 @@ import {
                 email: email,
                 comment: e.comment,
             }
-            console.log(payload, "payload");
             commentMutation(payload as addCommentProps, {
                 onSuccess: () => {
-                    blogsRefetch();
-                    commentsRefetch();
+                  // console.log(payload, "payload");
+                  toast.success("Comment added successfully");
+                  blogsRefetch();
+                  commentsRefetch();
                 },
+                onError: (error: any) => {
+                  // console.log(error, "error");
+                  toast.error("Error adding comment:", error.message);
+                }
             })
       }}
         
@@ -79,6 +87,10 @@ import {
         likesMutation(p,{
             onSuccess: () => {
                 blogsRefetch();
+            },
+            onError: (error: any) => {
+                // console.log(error, "error");
+                toast.error("Error adding likes");
             }
         }) 
     }
@@ -88,6 +100,10 @@ import {
         unlikesMutation(p,{
             onSuccess: () => {
                 blogsRefetch();
+            },
+            onError: (error: any) => {
+                // console.log(error, "error");
+                toast.error("Error adding unlikes");
             }
         }) 
     }
@@ -197,7 +213,7 @@ import {
                 helperText={errors.comment?.message}
               />
               <Button type="submit" variant="contained" color="primary">
-                Submit
+                {isCommentMutationPending ? <CircularProgress size={24} color="inherit" /> :'Submit'}
               </Button>
             </form>
   

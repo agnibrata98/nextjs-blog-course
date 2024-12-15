@@ -1,132 +1,3 @@
-// import React, { useState } from "react";
-// import {
-//   List,
-//   ListItem,
-//   Typography,
-//   Divider,
-//   Paper,
-//   Box,
-//   Button,
-//   Drawer,
-//   useMediaQuery,
-//   useTheme,
-// } from "@mui/material";
-// import MenuIcon from "@mui/icons-material/Menu";
-// import CloseIcon from "@mui/icons-material/Close";
-// import Link from "next/link";
-
-// const SideBar = () => {
-//   const [isOpen, setIsOpen] = useState(false);
-
-//   // Determine if the screen size is mobile
-//   const theme = useTheme();
-//   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
-
-//   // Toggle Sidebar Visibility
-//   const toggleSidebar = () => {
-//     setIsOpen((prev) => !prev);
-//   };
-
-//   return (
-//     <>
-//       {/* Toggle Button - Only visible in mobile view */}
-//       {isMobile && (
-//         <Button
-//           onClick={toggleSidebar}
-//           sx={{
-//             position: "fixed",
-//             top: 16,
-//             left: 16,
-//             // zIndex: 1300,
-//             backgroundColor: "#1976d2",
-//             color: "#fff",
-//             "&:hover": {
-//               backgroundColor: "#115293",
-//             },
-//           }}
-//           startIcon={<MenuIcon />}
-//         >
-//           Menu
-//         </Button>
-//       )}
-
-//       {/* Sidebar Drawer */}
-//       <Drawer
-//         anchor="left"
-//         open={!isMobile || isOpen} // Always open on desktop; toggleable on mobile
-//         onClose={toggleSidebar}
-//         variant={isMobile ? "temporary" : "permanent"} // Permanent drawer for desktop
-//         sx={{
-//           zIndex: isMobile ? 1200 : 0, // Adjust z-index for mobile/desktop
-//           "& .MuiDrawer-paper": {
-//             width: 250,
-//             padding: 3,
-//             height: "100%",
-//             backgroundColor: "#f5f5f5",
-//             boxShadow: isMobile ? "0px 4px 12px rgba(0, 0, 0, 0.1)" : "none",
-//           },
-//         }}
-//       >
-//         {/* Close Button - Only visible in mobile view */}
-//         {isMobile && (
-//           <Button
-//             onClick={toggleSidebar}
-//             sx={{
-//               display: "flex",
-//               justifyContent: "flex-end",
-//               width: "100%",
-//               marginBottom: 2,
-//             }}
-//           >
-//             <CloseIcon />
-//           </Button>
-//         )}
-
-//         {/* Sidebar Content */}
-//         {/* <Typography
-//           variant="h6"
-//           gutterBottom
-//           sx={{ fontWeight: "bold", color: "#333", textAlign: "center" }}
-//         >
-//           Product Categories
-//         </Typography> */}
-//         {/* <Divider sx={{ mb: 3, borderColor: "#1976d2" }} /> */}
-//         <List>
-//           <ListItem
-//             component={Link}
-//             href="/cms/all-blogs"
-//             sx={{
-//               borderRadius: 1,
-//               transition: "transform 0.2s, box-shadow 0.2s",
-//               "&:hover": {
-//                 transform: "translateX(10px)",
-//                 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
-//                 backgroundColor: "#e3f2fd",
-//               },
-//               textDecoration: "none",
-//               color: "#1976d2",
-//             }}
-//           >
-//             <Typography
-//               sx={{
-//                 textTransform: "capitalize",
-//                 padding: 1,
-//                 textAlign: "left",
-//                 fontWeight: "bold",
-//               }}
-//             >
-//               All Blogs
-//             </Typography>
-//           </ListItem>
-//         </List>
-//       </Drawer>
-//     </>
-//   );
-// };
-
-// export default SideBar;
-
-
 import React, { useEffect, useState } from 'react';
 import {
   Drawer,
@@ -451,8 +322,6 @@ const SideBar: React.FC = () => {
         )
       }
     </List>
-
-    
   );
 
 
@@ -503,16 +372,6 @@ const SideBar: React.FC = () => {
             )
           )
         }
-        {/* {
-          token && user && (
-              <Box display="flex" alignItems="center" ml={2}>
-                <IconButton size="large" edge="start" color="inherit">
-                    <Avatar src={user?.photo} alt={user?.name} sx={{ width: 32, height: 32, mr: 1 }} />
-                </IconButton>
-                  <Typography variant="body1" color="inherit">Hello {user?.name}</Typography>
-              </Box>
-          )
-        } */}
       </Drawer>
     </Box>
   );

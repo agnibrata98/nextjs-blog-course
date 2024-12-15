@@ -17,7 +17,7 @@ export const createStudentMutation = (): UseMutationResult<createStudentProps, u
             const { success, msg } = res || {}
             if (success) {
                 // cookie.set("token", token, { path: "/", secure: true })
-                console.log(res, "res");
+                // console.log(res, "res");
             }
             queryClient.invalidateQueries({ queryKey: ["CREATE_STUDENT"] })
         }
@@ -48,7 +48,7 @@ export const updateStudentMutation = (id: string) => {
         mutationFn: (payload: updateStudentProps) => updateStudentFn(id, payload),
         onSuccess: data => {
         queryClient.invalidateQueries({ queryKey: ["UPDATE-STUDENT"] });
-        console.log(data, "UPDATED STUDENT");
+        // console.log(data, "UPDATED STUDENT");
         }
     });
 };
@@ -61,7 +61,7 @@ export const deleteStudentMutation = (id: string): UseMutationResult<deleteStude
         onSuccess: (res) => {
             const { status, message } = res || {}
             if (status === true) {
-                console.log(res, "res");
+                // console.log(res, "res");
                 // console.log(message, "message");
             }
             queryClient.invalidateQueries({ queryKey: ["DELETE-STUDENT"] })

@@ -5,7 +5,17 @@ import { FieldValues, useForm } from "react-hook-form";
 import { contactProps } from "@/typeScript/cms.interface";
 import toast from "react-hot-toast";
 import ErrorPage from "@/ui/errors/Error";
-import AliceCarousel from "react-alice-carousel";
+import Carousel from 'react-material-ui-carousel'
+import image1 from "@/public/images/carousel1.jpg"
+import image2 from "@/public/images/carousel2.jpg"
+import image3 from "@/public/images/carousel3.jpg"
+
+
+interface CarouselItem {
+  name: string;
+  description: string;
+  image: string; // Use `string` if the `image` is a URL or a path to the image
+}
 
 
 var services = [
@@ -41,11 +51,23 @@ var services = [
 ]
 
 
-const items = [
-  <img src="/images/carousel1.jpg" alt="Image 1" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,,
-  <img src="/images/carousel2.jpg" alt="Image 2" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
-  <img src="/images/carousel3.jpg" alt="Image 3" className="carousel-image" style={{ objectFit: "cover", width: "100%", height: "100%" }} />,
-];
+var carouselItems: CarouselItem[] = [
+  {
+      name: "Random Name #1",
+      description: "Probably the most random thing you have ever seen!",
+      image: 'http://online.hbs.edu/Style%20Library/api/resize.aspx?imgpath=/PublishingImages/overhead-view-of-business-strategy-meeting.jpg&w=1200&h=630'
+  },
+  {
+      name: "Random Name #2",
+      description: "Hello World!",
+      image: "https://savvycomsoftware.com/wp-content/uploads/2020/02/IMG_9741.jpg"
+  },
+  {
+    name: "Random Name #3",
+    description: "Hello World!",
+    image: "http://online.hbs.edu/Style%20Library/api/resize.aspx?imgpath=/PublishingImages/overhead-view-of-business-strategy-meeting.jpg&w=1200&h=630"
+  }
+]
 
 export default function Home() {
   const {
@@ -81,6 +103,7 @@ export default function Home() {
         },
     });
   };
+  
   if (isError) {
     return (
       <Box
@@ -98,17 +121,27 @@ export default function Home() {
   return (
     <>
 
-    {/* slider section */}
-    <AliceCarousel
-       items={items}
-      //  responsive={responsive}
-       autoPlay
-       autoPlayInterval={1000}
-       infinite
-       animationDuration={500}
-       disableDotsControls
-       disableButtonsControls
-    />
+    {/* carousel section */}
+    <Carousel 
+      autoPlay 
+      // infiniteLoop 
+      interval={2000}  
+      animation='slide'
+      duration={1000}
+      swipe={true}
+    >
+           {carouselItems.map((item : CarouselItem) => {
+            return(
+                <>
+                
+                <img src={item.image} height="100%" width="100%"/>
+                
+                
+                </>
+            )
+           })}
+    </Carousel>
+
       {/* services section */}
       <Container maxWidth="lg" sx={{ mt: 8 }}>
         <Typography variant="h4" textAlign="center" mb={4}>

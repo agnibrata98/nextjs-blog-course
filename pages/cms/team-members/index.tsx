@@ -64,17 +64,18 @@
 
 
 import { allTeamMembersQuery } from '@/customHooks/cms.query.hooks'
-import { Box, Card, CardContent, CardMedia, Grid, IconButton, Typography } from '@mui/material'
+import { Box, Card, CardContent, CardMedia, CircularProgress, Grid, IconButton, Typography } from '@mui/material'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import XIcon from '@mui/icons-material/X';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import MailIcon from '@mui/icons-material/Mail';
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import ErrorPage from '@/ui/errors/Error';
 
 const TeamMembers = () => {
     // for team members fetching query
-    const { data: allTeamMembersData, isPending: allTeamMembersPending } = allTeamMembersQuery();
+    const { data: allTeamMembersData, isPending: allTeamMembersPending, isError: isAllTeamMembersDataError, error: allTeamMembersDataError } = allTeamMembersQuery();
     const allTeamMembers = allTeamMembersData?.TeamMember || [];
 
     // Refs for GSAP animations
@@ -92,6 +93,37 @@ const TeamMembers = () => {
             });
         });
     }, []);
+
+
+    if (allTeamMembersPending) {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <CircularProgress />
+          </Box>
+        );
+      }
+
+      if (isAllTeamMembersDataError) {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <ErrorPage errorMessage={(allTeamMembersDataError as Error).message || 'An error occurred'} />
+        </Box>
+      );
+    }
 
   return (
     <div>

@@ -66,7 +66,7 @@ const Login: React.FC = () => {
         // console.log(data, "data");
         setToken("");
         toast.success(data.message);
-        router.push("/");
+        router.push("/cms/all-blogs");
       },
       onError: (error: any) => {
         console.log(error, "error");

@@ -9,6 +9,7 @@ import Link from 'next/link';
 import { registerProps } from '@/typeScript/auth.interface';
 import { registerMutation } from '@/customHooks/auth.query.hooks';
 import toast from 'react-hot-toast';
+import { useRouter } from 'next/router';
 
 const Input = styled('input')({
   display: 'none',
@@ -18,6 +19,9 @@ const Register : React.FC = () => {
   // state management
     const [img, setImg] = useState<File | null>(null);
     const [showPassword, setShowPassword] = useState(false);
+    
+  // for router navigation
+    const router = useRouter();
 
     // react hook forms
   const {
@@ -28,7 +32,8 @@ const Register : React.FC = () => {
 
   // register mutation
 
-  const { mutate, isPending } = registerMutation()
+  const { mutate, isPending, isError, error } = registerMutation()
+  // console.log(error, "error");
 
   // on submit function for  register
   const onSubmit = (formData: registerProps) => {
@@ -44,15 +49,17 @@ const Register : React.FC = () => {
 
     mutate(formdata, {
       onSuccess: (data) => {
-        console.log(data, "data");
+        // console.log(data, "data");
         toast.success(data.message);
+        router.push("/auth/login");
       },
-      onError: (error) => {
-        console.log(error, "error");
+      onError: (error: any) => {
+        // console.log(error, "error");
+        toast.error(error.response.data.msg);
       },
     });
 
-    console.log(formData);
+    // console.log(formData);
   };
 
   return (

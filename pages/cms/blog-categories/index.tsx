@@ -1,11 +1,12 @@
 import { allCategoriesQuery } from '@/customHooks/cms.query.hooks'
-import { CircularProgress, Container, Grid, Paper, Typography } from '@mui/material';
+import ErrorPage from '@/ui/errors/Error';
+import { Box, CircularProgress, Container, Grid, Paper, Typography } from '@mui/material';
 import Link from 'next/link';
 import React from 'react'
 
 const BlogCategories = () => {
     // all categories query
-    const { data: blogCategoriesData, isPending: blogCategoriesDataPending } = allCategoriesQuery()
+    const { data: blogCategoriesData, isPending: blogCategoriesDataPending, isError: isBlogCategoriesError, error: blogCategoriesError } = allCategoriesQuery()
 
     // console.log(blogCategoriesData, "blogCategoriesData");
 
@@ -17,6 +18,21 @@ const BlogCategories = () => {
                 <CircularProgress />
             </div>
         )
+    }
+
+    if (isBlogCategoriesError) {
+        return (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+            }}
+          >
+            <ErrorPage errorMessage={(blogCategoriesError as Error).message || 'An error occurred'} />
+        </Box>
+      );
     }
   return (
     <>

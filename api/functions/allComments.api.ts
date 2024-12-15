@@ -4,6 +4,6 @@ import { endpoints } from "../endPoints/endPoints";
 
 export const allCommentsAPICall = async (id : string) => {
     const res = await axiosInstance.get<commentProps>(`${endpoints.blogs.showcomment}/${id}`)
-    console.log('allComments res', res);
+    // console.log('allComments res', res);
     return res.data;
 }

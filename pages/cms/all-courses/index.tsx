@@ -2,6 +2,7 @@ import { allCoursesQuery } from '@/customHooks/cms.query.hooks';
 import { DataGrid } from '@mui/x-data-grid';
 import { Card, Typography, CircularProgress, Box } from '@mui/material';
 import React from 'react';
+import ErrorPage from '@/ui/errors/Error';
 
 const columns = [
   { field: 'name', headerName: 'Course Name', width: 200 },
@@ -12,9 +13,24 @@ const columns = [
 
 const AllCourses = () => {
   // all courses query
-  const { data: allCoursesData, isPending: allCoursesPending } = allCoursesQuery();
+  const { data: allCoursesData, isPending: allCoursesPending, isError: isAllCoursesError, error: allCoursesError } = allCoursesQuery();
+
   const allCourses = allCoursesData?.Courses || [];
 
+  if (isAllCoursesError) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <ErrorPage errorMessage={(allCoursesError as Error).message || 'An error occurred'} />
+    </Box>
+  );
+}
   return (
     <Box sx={{ p: 3, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       <Typography variant="h4" sx={{ mb: 3, fontWeight: 'bold', textAlign: 'center' }}>

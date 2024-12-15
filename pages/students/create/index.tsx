@@ -39,9 +39,9 @@ const CreateStudent = () => {
                 toast.success(data.msg);
                 router.push("/students/all-students");
             },
-            onError: (error) => {
-                console.log(error, "error");
-            },
+            // onError: (error) => {
+            //     console.log(error, "error");
+            // },
         });
     };
 

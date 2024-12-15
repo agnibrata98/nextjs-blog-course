@@ -52,7 +52,7 @@ export const addCommentMutation = (id: string) => {
         mutationFn: (payload: addCommentProps) => addCommentFn(id, payload),
         onSuccess: data => {
         queryClient.invalidateQueries({ queryKey: ["ADD-COMMENT"] });
-        console.log(data, "data of comments adding");
+        // console.log(data, "data of comments adding");
         }
     });
 };
@@ -64,7 +64,7 @@ export const addLikesMutation = (id: string) => {
         mutationFn: () => addLikesFn(id),
         onSuccess: data => {
         queryClient.invalidateQueries({ queryKey: ["ADD-LIKES"] });
-        console.log(data.likes, "data of likes adding");
+        // console.log(data.likes, "data of likes adding");
         }
     });
 };
@@ -76,7 +76,7 @@ export const addUnlikesMutation = (id: string) => {
         mutationFn: () => addUnlikesFn(id),
         onSuccess: data => {
         queryClient.invalidateQueries({ queryKey: ["ADD-UNLIKES"] });
-        console.log(data.unlikes, "data of unlikes adding");
+        // console.log(data.unlikes, "data of unlikes adding");
         }
     });
 };
